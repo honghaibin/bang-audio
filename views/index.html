@@ -3,148 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>audio</title>
+	<link rel="stylesheet" href="./stylesheets/bang-audio.css">
 	<script src="javascripts/jquery.min.js"></script>
 	<style>
-		.audio.bang-audio-player {
-		  width: 400px;
-		  min-width: 300px;
-		  height: 56px;
-		  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.07);
-		  align-items: center;
-		  padding-left: 24px;
-		  padding-right: 24px;
-		  display: flex;
-		  justify-content:space-between;
-		  border-radius: 4px;
-		  user-select: none;
-		  -webkit-user-select: none;
-		  background-color: #fff;
-		}
-		.audio.bang-audio-player .play-pause-btn {
-		  display: none;
-		  cursor: pointer;
-		}
-		.audio.bang-audio-player .spinner {
-		  width: 18px;
-		  height: 18px;
-		  background-image: url(images/loading.png);
-		  background-size: cover;
-		  background-repeat: no-repeat;
-		  animation: spin 0.4s linear infinite;
-		}
-		.audio.bang-audio-player .slider {
-		  flex-grow: 1;
-		  background-color: #D8D8D8;
-		  cursor: pointer;
-		  position: relative;
-		}
-		.audio.bang-audio-player .slider .progress {
-		  background-color: #44BFA3;
-		  border-radius: inherit;
-		  position: absolute;
-		  pointer-events: none;
-		}
-		.audio.bang-audio-player .slider .progress .pin {
-		  height: 16px;
-		  width: 16px;
-		  border-radius: 8px;
-		  background-color: #44BFA3;
-		  position: absolute;
-		  pointer-events: all;
-		  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
-		}
-		.audio.bang-audio-player .controls {
-		  font-family: 'Roboto', sans-serif;
-		  font-size: 16px;
-		  line-height: 18px;
-		  color: #55606E;
-		  display: flex;
-		  flex-grow: 1;
-		  justify-content: space-between;
-		  align-items: center;
-		  margin-left: 24px;
-		  margin-right: 24px;
-		}
-		.audio.bang-audio-player .controls .slider {
-		  margin-left: 16px;
-		  margin-right: 16px;
-		  border-radius: 2px;
-		  height: 4px;
-		}
-		.audio.bang-audio-player .controls .slider .progress {
-		  width: 0;
-		  height: 100%;
-		}
-		.audio.bang-audio-player .controls .slider .progress .pin {
-		  right: -8px;
-		  top: -6px;
-		}
-		.audio.bang-audio-player .controls span {
-		  cursor: default;
-		}
-		.audio.bang-audio-player .volume {
-		  position: relative;
-		}
-		.audio.bang-audio-player .volume .volume-btn {
-		  cursor: pointer;
-		}
-		.audio.bang-audio-player .volume .volume-btn.open path {
-		  fill: #44BFA3;
-		}
-		.audio.bang-audio-player .volume .volume-controls {
-		  width: 30px;
-		  height: 135px;
-		  background-color: rgba(0, 0, 0, 0.62);
-		  border-radius: 7px;
-		  position: absolute;
-		  left: -3px;
-		  bottom: 52px;
-		  flex-direction: column;
-		  align-items: center;
-		  display: flex;
-		}
-		.audio.bang-audio-player .volume .volume-controls.hidden {
-		  display: none;
-		}
-		.audio.bang-audio-player .volume .volume-controls .slider {
-		  margin-top: 12px;
-		  margin-bottom: 12px;
-		  width: 6px;
-		  border-radius: 3px;
-		}
-		.audio.bang-audio-player .volume .volume-controls .slider .progress {
-		  bottom: 0;
-		  height: 100%;
-		  width: 6px;
-		}
-		.audio.bang-audio-player .volume .volume-controls .slider .progress .pin {
-		  left: -5px;
-		  top: -8px;
-		}
-		.audio.bang-audio-player .download {
-		  position: relative;
-		}
-		.audio.bang-audio-player .download .download-btn {
-		  cursor: pointer;
-		}
-		.audio.bang-audio-player .rate {
-		  position: relative;
-		  width: 32px;
-	      height: 14px;
-	      text-align: center;
-	      line-height: 14px;
-	      background-color: #566574;
-	      border-radius: 2px;
-	      color: #ddd;
-	      font-size: 10px;
-		}
-		.audio.bang-audio-player .rate .rate-btn {
-		  cursor: pointer;
-		}
-
-		svg, img {
-		  display: block;
-		}
+		
 
 		html, body {
 		  height: 100%;
@@ -154,74 +16,11 @@
 		  background: lightblue;
 		}
 
-		@keyframes spin {
-		  from {
-		    transform: rotateZ(0);
-		  }
-		  to {
-		    transform: rotateZ(1turn);
-		  }
-		}
+		
 	</style>
 </head>
 <body>
 <div style="height: 200px;"></div>
-	<!-- <div class="audio bang-audio-player">
-		<div class="loading">
-		    <div class="spinner"></div>
-		</div>
-		<div class="play-pause-btn" onclick="BANG_audio.togglePlay(event)">  
-		    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24">
-		     	<path fill="#566574" fill-rule="evenodd" d="M18 12L0 24V0" class="play-pause-icon" data-role="playPause">
-		    </svg>
-		</div>
-		<div class="controls">
-    		<span class="current-time">0:00</span>
-    		<div class="slider" data-direction="horizontal" onclick="BANG_audio.rewind(event)">
-      			<div class="progress">
-        			<div class="pin" id="progress-pin" data-method="rewind"></div>
-      			</div>
-    		</div>
-    		<span class="total-time">0:00</span>
-  		</div>
-  		<div class="volume">
-		    <div class="volume-btn" onclick="BANG_audio.openVolumeControls(event)">
-		      	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-		        	<path fill="#566574" fill-rule="evenodd" d="M14.667 0v2.747c3.853 1.146 6.666 4.72 6.666 8.946 0 4.227-2.813 7.787-6.666 8.934v2.76C20 22.173 24 17.4 24 11.693 24 5.987 20 1.213 14.667 0zM18 11.693c0-2.36-1.333-4.386-3.333-5.373v10.707c2-.947 3.333-2.987 3.333-5.334zm-18-4v8h5.333L12 22.36V1.027L5.333 7.693H0z" data-role="speaker">
-		      	</svg>
-		    </div>
-		    <div class="volume-controls hidden">
-		      	<div class="slider" data-direction="vertical" onclick="BANG_audio.changeVolume(event)">
-		        	<div class="progress">
-		          		<div class="pin" id="volume-pin" data-method="changeVolume"></div>
-		        	</div>
-		      	</div>
-		    </div>
-		</div>
-		<div class="download">
-			<div class="volume-btn">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-		        	<path fill="#566574" fill-rule="evenodd" d="M368,224L240,352L112,224h80V32h96v192H368z M240,352H0v128h480V352H240z M448,416h-64v-32h64V416z" >
-		      	</svg>
-			</div>
-		</div>
-
-		<div class="rate">
-			<div class="rate-btn">
-				x1.0
-			</div>
-		</div>
-
-		<audio 
-		crossorigin 
-		ontimeupdate="BANG_audio.updateProgress(event)" 
-		onvolumechange="BANG_audio.updateVolume(event)" 
-		onloadedmetadata="BANG_audio.showTotalTime(event)"
-		oncanplay="BANG_audio.makePlay(event)"
-		onended="BANG_audio.ended(event)" >
-		    <source src="" type="audio/mpeg">
-		</audio>
-	</div> -->
 	<div id="app"></div>
 </body>
 <script src='./javascripts/bang-audio.js'></script>
