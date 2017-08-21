@@ -200,8 +200,8 @@
 			var rect = rangeBox.getBoundingClientRect();
 			var direction = rangeBox.dataset.direction;
 			if (direction == 'horizontal') {
-			    var min = rangeBox.offsetLeft;
-			    var max = min + rangeBox.offsetWidth;
+			    var min = BANG_audio.getLeft(rangeBox);
+                var max = min + rangeBox.offsetWidth;
                 var minH = rect.top;
                 var maxH = minH + rangeBox.offsetHeight;
 			    if (e.clientX < min || e.clientX > max || e.clientY < minH || e.clientY > maxH) return false;
@@ -215,6 +215,18 @@
 			return true;
     	}
 
+        app.pt.getTop= function(el){
+            var offset=el.offsetTop;
+            if(el.offsetParent!=null) offset+=BANG_audio.getTop(el.offsetParent);
+            return offset;
+        }
+
+        app.pt.getLeft= function(el){
+            var offset=el.offsetLeft;
+            if(el.offsetParent!=null) offset+=BANG_audio.getLeft(el.offsetParent);
+            return offset;
+        }
+        
     	app.pt.getRangeBox= function(e){
     		var rangeBox = e.target;
 			var el = currentlyDragged;
@@ -233,8 +245,7 @@
 			var rect = slider.getBoundingClientRect();
 			var K = 0;
 			if (slider.dataset.direction == 'horizontal') {
-
-			   	var offsetX = event.clientX - slider.offsetLeft;
+			   	var offsetX = e.clientX - BANG_audio.getLeft(slider);
 			    var width = slider.clientWidth;
 			    K = offsetX / width;
 			} else if (slider.dataset.direction == 'vertical') {
